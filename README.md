@@ -6,12 +6,33 @@ There are large amount of tourists traveling in the U.S. from all over the world
 
 ### Data description
 
-Historical monthly mean temperature and percipitation data from 1999 to 2018 (20 years) for ten tourist cities in the U.S. + AMES has been obtained from [PRISM Climate](http://www.prism.oregonstate.edu/). Seperate prediction models has been created for each location, the following documentation will take the analysis of Ames(Story, IA) data as an example. The reason of choosing the year range is because we don't have full weather record of december 2019 yet. And we want to compare the prediction accuracy of most recent decade to late 90's decade, since climate change is noticed more dramatic in recent years. The data was collected from the explorer tab in the website with manually choosing needed location and data. Since the location is based on state and county, we don't have access to the original weather station data, it's hard to tell if the dataset for a county comes from more than one weather station or several neighbor counties share data from one weather station. This could be an accuracy concern for further predictions. The historical weather data is not hard to collect online for the selected year range, and it shouldn't change over time. The directly downloaded file contains data description at the top which cannot read in as dataframe of panda, so it has to be removed before load onto notebook. 
+Historical monthly mean temperature and precipitation data from 1999 to 2018 (20 years) for ten tourist cities in the U.S. + AMES has been obtained from [PRISM Climate](http://www.prism.oregonstate.edu/). **Seperate prediction models has been created for each location, the following documentation will take the analysis of Ames(Story, IA) data as an example.** The reason of choosing the year range is because we don't have full weather record of december 2019 yet. And we want to compare the prediction accuracy of most recent decade to late 90's decade, since climate change is noticed more dramatic in recent years. The data was collected from the explorer tab in the website with manually choosing needed location and data. Since the location is based on state and county, we don't have access to the original weather station data, it's hard to tell if the dataset for a county comes from more than one weather station or several neighbor counties share data from one weather station. This could be an accuracy concern for further predictions. The historical weather data is not hard to collect online for the selected year range, and it shouldn't change over time. The directly downloaded file contains data description at the top which cannot read in as dataframe of panda, so it has to be removed before load onto notebook. [Data details from PRISM](http://www.prism.oregonstate.edu/documents/PRISM_datasets.pdf)
 
 ### Explore the data
 
+Before going into data analysis and model training, I imported necessary packages from numpy, pandas, matplotlib, sklearn, and seaborn. 
+```python
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+%matplotlib inline
+import sklearn as sk
+import sklearn.datasets as skd
+import sklearn.ensemble as ske
+import seaborn as sns
+```
 
-[Details](http://www.prism.oregonstate.edu/documents/PRISM_datasets.pdf)
+1. After loading the dataset, I fisrt take a looked at the head(`df.head()`) and shape(`df.shape`) of the data. The original data have 5 columns includes Date *year & month*, ppt(mm) *average precipitation*, tmin(degrees C) *minimum temperature*, tmean(degrees C) *average temperature* and tmax(degrees C) *maximum temperature*; and 240 rows for 20 years and 12 monthes in each year. 
+![alt text]()
+
+2. In order to feed year and month as independent variables into the model, the Date column need to be seperated into year and month columns. I used `df.str.split` function as showing below. 
+![alt text]()
+
+3. Check if there are any N/A in the data `pd.isnull()`. There is no N/A in the data. 
+![alt text]()
+
+4. Finally, verify the quality of the data. Using `df.describe()` to get the numerical summary of all columns, and calculate & plot the correlation `corr` and distribution `attr` of each feature. Look for any zeros in the measurement columns and any anomalous data points in graphs. 
+
 Demonstrate what you would do to describe the data and if it has any patterns or anomolies.  Make some plots.
 
 ### Model the data
