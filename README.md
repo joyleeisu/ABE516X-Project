@@ -1,38 +1,11 @@
-## Making a Project Website
+## Weather Predictor for Travelers
 
-### Configuration variables
+### Overview
 
-This instruction is specific to the slate theme but should translate well to other themes.  You can change default variables in your website build by making changes in your `_config.yml` file:
+There are large amount of tourists traveling in the U.S. from all over the world. But for the people that's first time visiting the city or even first time come to America, they would have no idea about the weather, especially temperature, of the destination at the time they plan to travel. Moreover, some tourists might want to travel sometime and somewhere warm or cool, then it will be essential to know the average temperature of certain city and month to make travel plan. This tool is predicting the average temperatures and precipitation of the user's interest city and month. It will also display a histogram of 12 monthes average temperature in a year for the interested city to help the visitor to make travel plan. 
 
-```yml
-title: Zhaohui (Joy) 's Project
-description: ABE 516X Project: Weather Predictor for Traveler
-```
-
-Additionally, you may choose to set the following optional variables:
-
-```yml
-show_downloads: true
-google_analytics: [Your Google Analytics tracking ID]
-```
-You can take a look at the `_config.yml` file in this repository to see how to type in the title and description.
-
-### Markdown
-
-You can see this [cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) to work with Markdown language for adding features into this website.  This includes how to add headers, organization (e.g., bullets or lists), tables, and images.  It also includes how to add code to a website.
-
-*Note that for images, you will need to place the image file in a place that it can be referenced and called.  I would suggest the github repo might be a good solution.  Often, I make an images folder and can call the raw images file.
-
-See example [here](https://github.com/pages-themes/slate/blob/master/index.md).  You can see the raw code also.
-
-#### Relative Links
-To create links to other pages, you can read this article:  https://github.blog/2016-12-05-relative-links-for-github-pages/.  Note that these pages should by default direct to the same local folder/directory the index file is.  In this case, my README.md file is my index. If the files are in a different folder, one should specifiy the path for that folder.
-
-### Notebooks
-
-You can use a website to host notebooks.  First, you'll want to get the "raw" url from Github where your notebook is stored.  Then, navigate to https://nbviewer.jupyter.org and paste that URL.  The result will be a new generated URL that hosts your notebook.  This can be a [link](https://nbviewer.jupyter.org/github/isu-abe/516x/blob/master/module2/bootcamp/notebooks/nocode/Module%20IIB%20-%20Python%20Basics%20-%20no%20code.ipynb) in your website.
-
-## Suggestions for Project Reporting
+title: ABE 516X Project: Weather Predictor for Traveler
+description: Zhaohui (Joy) 's Project
 
 ### Interesting question 
 
