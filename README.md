@@ -6,12 +6,12 @@ There are large amount of tourists traveling in the U.S. from all over the world
 
 ### Data description
 
-Historical monthly mean temperature and percipitation data from 1999 to 2018 for ten tourist cities in the U.S. has been obtained from [PRISM Climate](http://www.prism.oregonstate.edu/). The data was collected from the explorer tab in the website with manually choosing needed location and data. Since the location is based on state and county, we don't have access to the original weather station data, it's hard to tell if the dataset for a county comes from more than one weather station or several neighbor counties share data from one weather station. This could be an accuracy concern for further predictions. 
-
-What kind of data is avialble?  How is your data collected?  Are there any concerns about the data?  Which data is the most relevant?  Is the data easy to acccess? Will the data change over time?  What needs to be done to the data to get it ready for any downstream analysis?
+Historical monthly mean temperature and percipitation data from 1999 to 2018 (20 years) for ten tourist cities in the U.S. + AMES has been obtained from [PRISM Climate](http://www.prism.oregonstate.edu/). Seperate prediction models has been created for each location, the following documentation will take the analysis of Ames(Story, IA) data as an example. The reason of choosing the year range is because we don't have full weather record of december 2019 yet. And we want to compare the prediction accuracy of most recent decade to late 90's decade, since climate change is noticed more dramatic in recent years. The data was collected from the explorer tab in the website with manually choosing needed location and data. Since the location is based on state and county, we don't have access to the original weather station data, it's hard to tell if the dataset for a county comes from more than one weather station or several neighbor counties share data from one weather station. This could be an accuracy concern for further predictions. The historical weather data is not hard to collect online for the selected year range, and it shouldn't change over time. The directly downloaded file contains data description at the top which cannot read in as dataframe of panda, so it has to be removed before load onto notebook. 
 
 ### Explore the data
 
+
+[Details](http://www.prism.oregonstate.edu/documents/PRISM_datasets.pdf)
 Demonstrate what you would do to describe the data and if it has any patterns or anomolies.  Make some plots.
 
 ### Model the data
