@@ -4,14 +4,9 @@
 
 There are large amount of tourists traveling in the U.S. from all over the world. But for the people that's first time visiting the city or even first time come to America, they would have no idea about the weather, especially temperature, of the destination at the time they plan to travel. Moreover, some tourists might want to travel sometime and somewhere warm or cool, then it will be essential to know the average temperature of certain city and month to make travel plan. This tool is predicting the average temperatures and precipitation of the user's interest city and month. It will also display a histogram of 12 monthes average temperature in a year for the interested city to help the visitor to make travel plan. 
 
-title: ABE 516X Project: Weather Predictor for Traveler
-description: Zhaohui (Joy) 's Project
-
-### Interesting question 
-
-What is the scientitifc goal?  What would you do if you had all the data?  What do you want to predict or estimate?  Why is this relevant to ABE researchers or the field?  Provide some background on the rationale and relevance.
-
 ### Data description
+
+Historical monthly mean temperature and percipitation data from 1999 to 2018 for ten tourist cities in the U.S. has been obtained from [PRISM Climate](http://www.prism.oregonstate.edu/). The data was collected from the explorer tab in the website with manually choosing needed location and data. Since the location is based on state and county, we don't have access to the original weather station data, it's hard to tell if the dataset for a county comes from more than one weather station or several neighbor counties share data from one weather station. This could be an accuracy concern for further predictions. 
 
 What kind of data is avialble?  How is your data collected?  Are there any concerns about the data?  Which data is the most relevant?  Is the data easy to acccess? Will the data change over time?  What needs to be done to the data to get it ready for any downstream analysis?
 
