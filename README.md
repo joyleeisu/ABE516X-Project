@@ -24,19 +24,19 @@ from sklearn.metrics import explained_variance_score, mean_absolute_error, mean_
 ```
 
 1. After loading the dataset, I fisrt take a look at the head(`df.head()`) and shape(`df.shape`) of the data. The original data have 5 columns includes Date (*year & month*), ppt(mm) (*average precipitation*), tmin(degrees C) (*minimum temperature*), tmean(degrees C) (*average temperature*) and tmax(degrees C) (*maximum temperature*); and 240 rows for 20 years and 12 monthes in each year. 
-![alt text]()
+![alt text](https://github.com/joyleeisu/ABE516X-Project.git/Code1.png)
 
 2. In order to feed year and month as independent variables into the model, the Date column need to be seperated into year and month columns. I used `df.str.split` function as showing below to seperate it. 
-![alt text]()
+![alt text](https://github.com/joyleeisu/ABE516X-Project.git/Code2.png)
 
 3. Check if there are any N/A in the data `pd.isnull()`. N/As are not found in the data. 
-![alt text]()
+![alt text](https://github.com/joyleeisu/ABE516X-Project.git/Code3.png)
 
 4. Finally, verify the quality of the data. Using `df.describe()` to get the numerical summary of all columns, and calculate & plot the correlation `corr` and distribution `attr` of each feature. Look for any zeros in the measurement columns and any anomalous data points in graphs. No zeros found in the data. The three temperatures have strong correlation with each other, so only mean temperature will be used for model prediction. 
-![alt text]()
-![alt text]()
-![alt text]()
-![alt text]()
+![alt text](https://github.com/joyleeisu/ABE516X-Project.git/Code4.png)
+![alt text](https://github.com/joyleeisu/ABE516X-Project.git/Plot1.png "Correlation Heatmap")
+![alt text](https://github.com/joyleeisu/ABE516X-Project.git/Plot2.png "Distribution Scatter")
+![alt text](https://github.com/joyleeisu/ABE516X-Project.git/Plot3.png "Distribution Hex")
 
 ### Model the data
 
@@ -61,9 +61,7 @@ print (y1.shape)
 print (y2.shape)
 ```
 Out: 
-(120, 2)
-(120, 1)
-(120, 1)
+![alt text](https://github.com/joyleeisu/ABE516X-Project.git/Code8.png)
 
 ```python
 # Take a look at x, y1 and y2
@@ -72,9 +70,9 @@ y1.head()
 y2.head()
 ```
 Out:
-![alt text]()
-![alt text]()
-![alt text]()
+![alt text](https://github.com/joyleeisu/ABE516X-Project.git/Code5.png)
+![alt text](https://github.com/joyleeisu/ABE516X-Project.git/Code6.png)
+![alt text](https://github.com/joyleeisu/ABE516X-Project.git/Code7.png)
 
 ```python
 # Split training & testing set for temperature prediction
@@ -92,15 +90,8 @@ print(x2_test.shape)
 print(y2_test.shape)
 ```
 Out:
-(84, 2)
-(84, 1)
-(36, 2)
-(36, 1)
-
-(84, 2)
-(84, 1)
-(36, 2)
-(36, 1)
+![alt text](https://github.com/joyleeisu/ABE516X-Project.git/Code9.png)
+![alt text](https://github.com/joyleeisu/ABE516X-Project.git/Code9.png)
 
 ```python
 # Flat the arrays
@@ -116,19 +107,8 @@ reg2 = ske.RandomForestRegressor(n_estimators= 1000, random_state= 0)
 reg2.fit(x2_train, y2_train)
 ```
 Out: 
-RandomForestRegressor(bootstrap=True, criterion='mse', max_depth=None,
-           max_features='auto', max_leaf_nodes=None,
-           min_impurity_decrease=0.0, min_impurity_split=None,
-           min_samples_leaf=1, min_samples_split=2,
-           min_weight_fraction_leaf=0.0, n_estimators=1000, n_jobs=None,
-           oob_score=False, random_state=0, verbose=0, warm_start=False)
-           
-RandomForestRegressor(bootstrap=True, criterion='mse', max_depth=None,
-           max_features='auto', max_leaf_nodes=None,
-           min_impurity_decrease=0.0, min_impurity_split=None,
-           min_samples_leaf=1, min_samples_split=2,
-           min_weight_fraction_leaf=0.0, n_estimators=1000, n_jobs=None,
-           oob_score=False, random_state=0, verbose=0, warm_start=False)
+![alt text](https://github.com/joyleeisu/ABE516X-Project.git/Code10.png)
+![alt text](https://github.com/joyleeisu/ABE516X-Project.git/Code10.png)
 
 2. Average Temperature & Precipitation from 2009 to 2018
 ```python
@@ -151,93 +131,115 @@ reg2r = ske.RandomForestRegressor(n_estimators= 1000, random_state= 0)
 reg2r.fit(x2r_train, y2r_train)
 ```
 Out: 
-RandomForestRegressor(bootstrap=True, criterion='mse', max_depth=None,
-           max_features='auto', max_leaf_nodes=None,
-           min_impurity_decrease=0.0, min_impurity_split=None,
-           min_samples_leaf=1, min_samples_split=2,
-           min_weight_fraction_leaf=0.0, n_estimators=1000, n_jobs=None,
-           oob_score=False, random_state=0, verbose=0, warm_start=False)
-           
-RandomForestRegressor(bootstrap=True, criterion='mse', max_depth=None,
-           max_features='auto', max_leaf_nodes=None,
-           min_impurity_decrease=0.0, min_impurity_split=None,
-           min_samples_leaf=1, min_samples_split=2,
-           min_weight_fraction_leaf=0.0, n_estimators=1000, n_jobs=None,
-           oob_score=False, random_state=0, verbose=0, warm_start=False)
+![alt text](https://github.com/joyleeisu/ABE516X-Project.git/Code10.png)
+![alt text](https://github.com/joyleeisu/ABE516X-Project.git/Code10.png)
 
 
 ### Communciate and visualize the results
 
+1. Temperature Prediction from 1999 to 2008
+```python
+y1_pred = reg1.predict(x1_test)
+y1_pred
+```
+Out:
+![alt text](https://github.com/joyleeisu/ABE516X-Project.git/Code11.png)
 
-What did you learn and do the results make sense?  Revisit your initial question and answer it. 
+```python
+print('Explained variance: ', explained_variance_score(y1_test, y1_pred))
+print('Mean absolute error: ', mean_absolute_error(y1_test, y1_pred))
+print('Mean squared error: ', mean_squared_error(y1_test, y1_pred))
+print('R-square: ', r2_score(y1_test, y1_pred, multioutput = 'variance_weighted'))
+```
+Out:
+![alt text](https://github.com/joyleeisu/ABE516X-Project.git/Code12.png)
+
+```python
+tmean1 = df['tmean (degrees C)'].mean()
+diff1 = y1_pred - tmean1
+diff1
+```
+Out:
+![alt text](https://github.com/joyleeisu/ABE516X-Project.git/Code13.png)
+
+```python
+type(diff1)
+sns.distplot(diff1, bins = 50)
+```
+Out:
+![alt text](https://github.com/joyleeisu/ABE516X-Project.git/Plot9.png)
+
+2. Precipitation Prediction from 1999 to 2008
+```python
+y2_pred = reg2.predict(x2_test)
+print('Explained variance: ', explained_variance_score(y2_test, y2_pred))
+print('Mean absolute error: ', mean_absolute_error(y2_test, y2_pred))
+print('Mean squared error: ', mean_squared_error(y2_test, y2_pred))
+print('R-square: ', r2_score(y2_test, y2_pred, multioutput = 'variance_weighted'))
+tmean2 = df['ppt (mm)'].mean()
+diff2 = y2_pred - tmean2
+type(diff2)
+sns.distplot(diff2, bins = 50)
+```
+Out:
+![alt text](https://github.com/joyleeisu/ABE516X-Project.git/Code14.png)
+
+3. Temperature Prediction from 2009 to 2018
+```python
+y1r_pred = reg1r.predict(x1r_test)
+
+print('Explained variance: ', explained_variance_score(y1r_test, y1r_pred))
+print('Mean absolute error: ', mean_absolute_error(y1r_test, y1r_pred))
+print('Mean squared error: ', mean_squared_error(y1r_test, y1r_pred))
+print('R-square: ', r2_score(y1r_test, y1r_pred, multioutput = 'variance_weighted'))
+
+tmean1r = df['tmean (degrees C)'].mean()
+diff1r = y1r_pred - tmean1r
+sns.distplot(diff1r, bins = 50)
+```
+Out:
+![alt text](https://github.com/joyleeisu/ABE516X-Project.git/Code16.png)
+
+4. Precipitation Prediction from 2009 to 2018
+```python
+y2r_pred = reg2r.predict(x2r_test)
+
+print('Explained variance: ', explained_variance_score(y2r_test, y2r_pred))
+print('Mean absolute error: ', mean_absolute_error(y2r_test, y2r_pred))
+print('Mean squared error: ', mean_squared_error(y2r_test, y2r_pred))
+print('R-square: ', r2_score(y2r_test, y2r_pred, multioutput = 'variance_weighted'))
+
+tmean2r = df['ppt (mm)'].mean()
+diff2r = y2r_pred - tmean2r
+sns.distplot(diff2r, bins = 50)
+```
+Out:
+![alt text](https://github.com/joyleeisu/ABE516X-Project.git/Code17.png)
+
+5. Compute how much each feature contributes
+```python
+reg1.feature_importances_
+```
+Out: 
+![alt text](https://github.com/joyleeisu/ABE516X-Project.git/Code15.png)
+
+```python
+fet_ind = np.argsort(reg1.feature_importances_)
+fet_imp = reg1.feature_importances_[np.argsort(reg1.feature_importances_)][::-1]
+fig, ax = plt.subplots(1, 1, figsize = (6, 5))
+labels = (['Month', 'Year'])
+pd.Series(fet_imp, index= labels).plot('bar', ax=ax)
+ax.set_title('Features importance')
+```
+Out: 
+![alt text](https://github.com/joyleeisu/ABE516X-Project.git/Plot10.png)
+
+The prediction accuracy of temperature in late 90's is calculated to be about 91.48%, and in the recent decade is about 95.57%. The plot of difference between predicted and average temperature data shows large difference, which indicate the model is necessary and useful for temperature prediction. The prediction accuracy of precipitation in late 90's is about 22.9%, and in the recent decade is about 21.8%. The plot of difference between predicted and average precipitation data shows little difference, which indicate the model is unnecessary and not useful for precipitation prediction. Besides, there is no clear trend and difference between the two decades. Part 5 shows that month has much higher weight in the trees than year, which is reasonable that temperature changes more in different month than year. Thus, base on the accuracy of each model, we can conclude that average temperature have much higher accuracy which is required and reliable. On the other hand, the accuracy of precipitation prediction is too low to show enough evidence for solid prediction. 
+
+The analysis and prediction process are using weather data of AMES as an example, weather data of the other 10 most famouse tourist cities are available on github and model can be trained using the same code. The entire project is yet to be finished, since it's missing the user interaction part, where the program will take in interested city and month from the user and output predicted temperature and histogram on website. 
 
 ### Class Exercise
 
-In each project, I'd like to see a homework assignment that the class can do/evaluate to learn more about your data.  This should be a reproducible notebook that allows them to learn one or more aspects of your data workflow.  It is also an opportunity to share your research with your colleagues.
-
-Here is an example of a fantastic project website:
-
-https://stephenslab.github.io/ipynb-website/
-
-## Advanced Features
-
-### Stylesheet (Advanced)
-
-If you'd like to add your own custom styles:
-
-1. Create a file called `/assets/css/style.scss` in your site
-2. Add the following content to the top of the file, exactly as shown:
-    ```scss
-    ---
-    ---
-
-    @import "{{ site.theme }}";
-    ```
-3. Add any custom CSS (or Sass, including imports) you'd like immediately after the `@import` line
-
-*Note: If you'd like to change the theme's Sass variables, you must set new values before the `@import` line in your stylesheet.*
-
-### Layouts (Advanced)
-
-If you'd like to change the theme's HTML layout:
-
-1. [Copy the original template](https://github.com/pages-themes/slate/blob/master/_layouts/default.html) from the theme's repository<br />(*Pro-tip: click "raw" to make copying easier*)
-2. Create a file called `/_layouts/default.html` in your site
-3. Paste the default layout content copied in the first step
-4. Customize the layout as you'd like
-
-### Overriding GitHub-generated URLs (Advanced)
-
-Templates often rely on URLs supplied by GitHub such as links to your repository or links to download your project. If you'd like to override one or more default URLs:
-
-1. Look at [the template source](https://github.com/pages-themes/slate/blob/master/_layouts/default.html) to determine the name of the variable. It will be in the form of `{{ site.github.zip_url }}`.
-2. Specify the URL that you'd like the template to use in your site's `_config.yml`. For example, if the variable was `site.github.url`, you'd add the following:
-    ```yml
-    github:
-      zip_url: http://example.com/download.zip
-      another_url: another value
-    ```
-3. When your site is built, Jekyll will use the URL you specified, rather than the default one provided by GitHub.
-
-*Note: You must remove the `site.` prefix, and each variable name (after the `github.`) should be indent with two space below `github:`.*
-
-For more information, see [the Jekyll variables documentation](https://jekyllrb.com/docs/variables/).
+The homework has been created based on this project with clear comments and guide and it's uploaded on github. 
 
 
-### Contributing (Advanced)
-
-Interested in contributing to Slate? We'd love your help. Slate is an open source project, built one contribution at a time by users like you. See [the CONTRIBUTING file](docs/CONTRIBUTING.md) for instructions on how to contribute.
-
-### Previewing the theme locally
-
-If you'd like to preview the theme locally (for example, in the process of proposing a change):
-
-1. Clone down the theme's repository (`git clone https://github.com/pages-themes/slate`)
-2. `cd` into the theme's directory
-3. Run `script/bootstrap` to install the necessary dependencies
-4. Run `bundle exec jekyll serve` to start the preview server
-5. Visit [`localhost:4000`](http://localhost:4000) in your browser to preview the theme
-
-### Running tests
-
-The theme contains a minimal test suite, to ensure a site with the theme would build successfully. To run the tests, simply run `script/cibuild`. You'll need to run `script/bootstrap` one before the test script will work.
