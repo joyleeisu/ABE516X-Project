@@ -24,15 +24,19 @@ from sklearn.metrics import explained_variance_score, mean_absolute_error, mean_
 ```
 
 1. After loading the dataset, I fisrt take a look at the head(`df.head()`) and shape(`df.shape`) of the data. The original data have 5 columns includes Date (*year & month*), ppt(mm) (*average precipitation*), tmin(degrees C) (*minimum temperature*), tmean(degrees C) (*average temperature*) and tmax(degrees C) (*maximum temperature*); and 240 rows for 20 years and 12 monthes in each year. 
+
 ![alt text](https://raw.githubusercontent.com/joyleeisu/ABE516X-Project/master/image/Code1.png)
 
 2. In order to feed year and month as independent variables into the model, the Date column need to be seperated into year and month columns. I used `df.str.split` function as showing below to seperate it. 
+
 ![alt text](https://raw.githubusercontent.com/joyleeisu/ABE516X-Project/master/image/Code2.png)
 
 3. Check if there are any N/A in the data `pd.isnull()`. N/As are not found in the data. 
+
 ![alt text](https://raw.githubusercontent.com/joyleeisu/ABE516X-Project/master/image/Code3.png)
 
 4. Finally, verify the quality of the data. Using `df.describe()` to get the numerical summary of all columns, and calculate & plot the correlation `corr` and distribution `attr` of each feature. Look for any zeros in the measurement columns and any anomalous data points in graphs. No zeros found in the data. The three temperatures have strong correlation with each other, so only mean temperature will be used for model prediction. 
+
 ![alt text](https://raw.githubusercontent.com/joyleeisu/ABE516X-Project/master/image/Code4.png)
 ![alt text](https://raw.githubusercontent.com/joyleeisu/ABE516X-Project/master/image/Plot1.png "Correlation Heatmap")
 ![alt text](https://raw.githubusercontent.com/joyleeisu/ABE516X-Project/master/image/Plot2.png "Distribution Scatter")
@@ -43,7 +47,9 @@ from sklearn.metrics import explained_variance_score, mean_absolute_error, mean_
 To build a model for mean temperature and precipitation prediction, the overall procedures are define training and testing dataset, define and fit the model. In order to compare the predicting accuracy of most recent decade to late 90's decade, seperate models will be trained with 1999-2008 and 2009-2018 data. Besides, since there are two dependent variables (*mean precipitation & temperature*), each dependent variable would require a unique model. Thus, for AMES, four models are traininged for comparison. Following are detailed code. 
 
 1. Average Temperature & Precipitation from 1999 to 2008 
+
 ```python
+
 from sklearn.model_selection import train_test_split
 
 dft = df[0:120].T
@@ -56,20 +62,28 @@ print (x.shape)
 print (y1.shape)
 print (y2.shape)
 ```
+
 Out: 
+
 ![alt text](https://raw.githubusercontent.com/joyleeisu/ABE516X-Project/master/image/Code8.png)
 
+
 ```python
+
 x.head()
 y1.head()
 y2.head()
+
 ```
+
 Out:
+
 ![alt text](https://raw.githubusercontent.com/joyleeisu/ABE516X-Project/master/image/Code5.png)
 ![alt text](https://raw.githubusercontent.com/joyleeisu/ABE516X-Project/master/image/Code6.png)
 ![alt text](https://raw.githubusercontent.com/joyleeisu/ABE516X-Project/master/image/Code7.png)
 
 ```python
+
 x1_train, x1_test, y1_train, y1_test = train_test_split(x, y1, test_size = 0.3, random_state=1)
 print(x1_train.shape)
 print(y1_train.shape)
@@ -82,11 +96,14 @@ print(y2_train.shape)
 print(x2_test.shape)
 print(y2_test.shape)
 ```
+
 Out:
+
 ![alt text](https://raw.githubusercontent.com/joyleeisu/ABE516X-Project/master/image/Code9.png)
 ![alt text](https://raw.githubusercontent.com/joyleeisu/ABE516X-Project/master/image/Code9.png)
 
 ```python
+
 y1_train = np.ravel(y1_train)
 y2_train = np.ravel(y2_train)
 
@@ -96,11 +113,14 @@ reg1.fit(x1_train, y1_train)
 reg2 = ske.RandomForestRegressor(n_estimators= 1000, random_state= 0)
 reg2.fit(x2_train, y2_train)
 ```
+
 Out: 
+
 ![alt text](https://raw.githubusercontent.com/joyleeisu/ABE516X-Project/master/image/Code10.png)
 ![alt text](https://raw.githubusercontent.com/joyleeisu/ABE516X-Project/master/image/Code10.png)
 
 2. Average Temperature & Precipitation from 2009 to 2018
+
 ```python
 dft = df[120:240].T
 xr = dft[5:7].T
@@ -117,7 +137,9 @@ y2r_train = np.ravel(y2r_train)
 reg2r = ske.RandomForestRegressor(n_estimators= 1000, random_state= 0)
 reg2r.fit(x2r_train, y2r_train)
 ```
+
 Out: 
+
 ![alt text](https://raw.githubusercontent.com/joyleeisu/ABE516X-Project/master/image/Code10.png)
 ![alt text](https://raw.githubusercontent.com/joyleeisu/ABE516X-Project/master/image/Code10.png)
 
@@ -125,20 +147,27 @@ Out:
 ### Communciate and visualize the results
 
 1. Temperature Prediction from 1999 to 2008
+
 ```python
+
 y1_pred = reg1.predict(x1_test)
 y1_pred
 ```
+
 Out:
+
 ![alt text](https://raw.githubusercontent.com/joyleeisu/ABE516X-Project/master/image/Code11.png)
 
 ```python
+
 print('Explained variance: ', explained_variance_score(y1_test, y1_pred))
 print('Mean absolute error: ', mean_absolute_error(y1_test, y1_pred))
 print('Mean squared error: ', mean_squared_error(y1_test, y1_pred))
 print('R-square: ', r2_score(y1_test, y1_pred, multioutput = 'variance_weighted'))
 ```
+
 Out:
+
 ![alt text](https://raw.githubusercontent.com/joyleeisu/ABE516X-Project/master/image/Code12.png)
 
 ```python
@@ -146,17 +175,22 @@ tmean1 = df['tmean (degrees C)'].mean()
 diff1 = y1_pred - tmean1
 diff1
 ```
+
 Out:
+
 ![alt text](https://raw.githubusercontent.com/joyleeisu/ABE516X-Project/master/image/Code13.png)
 
 ```python
+
 type(diff1)
 sns.distplot(diff1, bins = 50)
 ```
+
 Out:
 ![alt text](https://raw.githubusercontent.com/joyleeisu/ABE516X-Project/master/image/Plot9.png)
 
 2. Precipitation Prediction from 1999 to 2008
+
 ```python
 y2_pred = reg2.predict(x2_test)
 print('Explained variance: ', explained_variance_score(y2_test, y2_pred))
@@ -168,11 +202,15 @@ diff2 = y2_pred - tmean2
 type(diff2)
 sns.distplot(diff2, bins = 50)
 ```
+
 Out:
+
 ![alt text](https://raw.githubusercontent.com/joyleeisu/ABE516X-Project/master/image/Code14.png)
 
 3. Temperature Prediction from 2009 to 2018
+
 ```python
+
 y1r_pred = reg1r.predict(x1r_test)
 
 print('Explained variance: ', explained_variance_score(y1r_test, y1r_pred))
@@ -184,11 +222,15 @@ tmean1r = df['tmean (degrees C)'].mean()
 diff1r = y1r_pred - tmean1r
 sns.distplot(diff1r, bins = 50)
 ```
+
 Out:
+
 ![alt text](https://raw.githubusercontent.com/joyleeisu/ABE516X-Project/master/image/Code16.png)
 
 4. Precipitation Prediction from 2009 to 2018
+
 ```python
+
 y2r_pred = reg2r.predict(x2r_test)
 
 print('Explained variance: ', explained_variance_score(y2r_test, y2r_pred))
@@ -200,17 +242,23 @@ tmean2r = df['ppt (mm)'].mean()
 diff2r = y2r_pred - tmean2r
 sns.distplot(diff2r, bins = 50)
 ```
+
 Out:
+
 ![alt text](https://raw.githubusercontent.com/joyleeisu/ABE516X-Project/master/image/Code17.png)
 
 5. Compute how much each feature contributes
+
 ```python
 reg1.feature_importances_
 ```
+
 Out: 
+
 ![alt text](https://raw.githubusercontent.com/joyleeisu/ABE516X-Project/master/image/Code15.png)
 
 ```python
+
 fet_ind = np.argsort(reg1.feature_importances_)
 fet_imp = reg1.feature_importances_[np.argsort(reg1.feature_importances_)][::-1]
 fig, ax = plt.subplots(1, 1, figsize = (6, 5))
@@ -218,7 +266,9 @@ labels = (['Month', 'Year'])
 pd.Series(fet_imp, index= labels).plot('bar', ax=ax)
 ax.set_title('Features importance')
 ```
+
 Out: 
+
 ![alt text](https://raw.githubusercontent.com/joyleeisu/ABE516X-Project/master/image/Plot10.png)
 
 The prediction accuracy of temperature in late 90's is calculated to be about 91.48%, and in the recent decade is about 95.57%. The plot of difference between predicted and average temperature data shows large difference, which indicate the model is necessary and useful for temperature prediction. The prediction accuracy of precipitation in late 90's is about 22.9%, and in the recent decade is about 21.8%. The plot of difference between predicted and average precipitation data shows little difference, which indicate the model is unnecessary and not useful for precipitation prediction. Besides, there is no clear trend and difference between the two decades. Part 5 shows that month has much higher weight in the trees than year, which is reasonable that temperature changes more in different month than year. Thus, base on the accuracy of each model, we can conclude that average temperature have much higher accuracy which is required and reliable. On the other hand, the accuracy of precipitation prediction is too low to show enough evidence for solid prediction. 
