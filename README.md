@@ -187,6 +187,7 @@ sns.distplot(diff1, bins = 50)
 ```
 
 Out:
+
 ![alt text](https://raw.githubusercontent.com/joyleeisu/ABE516X-Project/master/image/Plot9.png)
 
 2. Precipitation Prediction from 1999 to 2008
