@@ -227,7 +227,7 @@ The analysis and prediction process are using weather data of AMES as an example
 
 ### Class Exercise
 
-The homework has been created based on this project with clear comments and guide and it's uploaded on [github](https://github.com/joyleeisu/ABE516X-Project.git/ABE516X Project HW.ipynb). 
+The homework has been created based on this project with clear comments and guide and it's uploaded on [github](https://github.com/joyleeisu/ABE516X-Project.git). 
 
 ### WorkFlow
 ![alt text](https://github.com/joyleeisu/ABE516X-Project.git/image/Workflow.jpg)
