@@ -46,16 +46,12 @@ To build a model for mean temperature and precipitation prediction, the overall 
 ```python
 from sklearn.model_selection import train_test_split
 
-# Select data from 1999 to 2008 and transpose column and row
 dft = df[0:120].T
 
-# Select year and month column for x
 x = dft[5:7].T
-# Select mean temperature for y1, mean precipitation for y2
 y1 = dft[3:4].T
 y2 = dft[1:2].T
 
-# Print shape of x, y1 and y2
 print (x.shape)
 print (y1.shape)
 print (y2.shape)
@@ -64,7 +60,6 @@ Out:
 ![alt text](https://github.com/joyleeisu/ABE516X-Project.git/Code8.png)
 
 ```python
-# Take a look at x, y1 and y2
 x.head()
 y1.head()
 y2.head()
@@ -75,14 +70,12 @@ Out:
 ![alt text](https://github.com/joyleeisu/ABE516X-Project.git/Code7.png)
 
 ```python
-# Split training & testing set for temperature prediction
 x1_train, x1_test, y1_train, y1_test = train_test_split(x, y1, test_size = 0.3, random_state=1)
 print(x1_train.shape)
 print(y1_train.shape)
 print(x1_test.shape)
 print(y1_test.shape)
 
-# Split training & testing set for precipitation prediction
 x2_train, x2_test, y2_train, y2_test = train_test_split(x, y2, test_size = 0.3, random_state=1)
 print(x2_train.shape)
 print(y2_train.shape)
@@ -94,15 +87,12 @@ Out:
 ![alt text](https://github.com/joyleeisu/ABE516X-Project.git/Code9.png)
 
 ```python
-# Flat the arrays
 y1_train = np.ravel(y1_train)
 y2_train = np.ravel(y2_train)
 
-# Fit temperature data
 reg1 = ske.RandomForestRegressor(n_estimators= 1000, random_state= 0)
 reg1.fit(x1_train, y1_train)
 
-# Fit precipitation data
 reg2 = ske.RandomForestRegressor(n_estimators= 1000, random_state= 0)
 reg2.fit(x2_train, y2_train)
 ```
@@ -112,19 +102,16 @@ Out:
 
 2. Average Temperature & Precipitation from 2009 to 2018
 ```python
-# Define datasets for recent decade
 dft = df[120:240].T
 xr = dft[5:7].T
 y1r = dft[3:4].T
 y2r = dft[1:2].T
 
-# Split training and testing dataset to train temperature model
 x1r_train, x1r_test, y1r_train, y1r_test = train_test_split(xr, y1r, test_size = 0.3, random_state=1)
 y1r_train = np.ravel(y1r_train)
 reg1r = ske.RandomForestRegressor(n_estimators= 1000, random_state= 0)
 reg1r.fit(x1r_train, y1r_train)
 
-# Split training and testing dataset to train precipitation model
 x2r_train, x2r_test, y2r_train, y2r_test = train_test_split(xr, y2r, test_size = 0.3, random_state=1)
 y2r_train = np.ravel(y2r_train)
 reg2r = ske.RandomForestRegressor(n_estimators= 1000, random_state= 0)
