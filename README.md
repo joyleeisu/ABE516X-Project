@@ -11,6 +11,7 @@ Historical monthly mean temperature and precipitation data from 1999 to 2018 (20
 ### Explore the data
 
 Before going into data analysis and model training, I imported necessary packages from numpy, pandas, matplotlib, seaborn, and sklearn. 
+
 ```python
 import numpy as np
 import pandas as pd
@@ -46,10 +47,10 @@ from sklearn.metrics import explained_variance_score, mean_absolute_error, mean_
 
 To build a model for mean temperature and precipitation prediction, the overall procedures are define training and testing dataset, define and fit the model. In order to compare the predicting accuracy of most recent decade to late 90's decade, seperate models will be trained with 1999-2008 and 2009-2018 data. Besides, since there are two dependent variables (*mean precipitation & temperature*), each dependent variable would require a unique model. Thus, for AMES, four models are traininged for comparison. Following are detailed code. 
 
-1. Average Temperature & Precipitation from 1999 to 2008 
+1. Average Temperature & Precipitation from 1999 to 2008
+
 
 ```python
-
 from sklearn.model_selection import train_test_split
 
 dft = df[0:120].T
@@ -69,11 +70,9 @@ Out:
 
 
 ```python
-
 x.head()
 y1.head()
 y2.head()
-
 ```
 
 Out:
@@ -82,8 +81,9 @@ Out:
 ![alt text](https://raw.githubusercontent.com/joyleeisu/ABE516X-Project/master/image/Code6.png)
 ![alt text](https://raw.githubusercontent.com/joyleeisu/ABE516X-Project/master/image/Code7.png)
 
-```python
 
+
+```python
 x1_train, x1_test, y1_train, y1_test = train_test_split(x, y1, test_size = 0.3, random_state=1)
 print(x1_train.shape)
 print(y1_train.shape)
@@ -103,7 +103,6 @@ Out:
 ![alt text](https://raw.githubusercontent.com/joyleeisu/ABE516X-Project/master/image/Code9.png)
 
 ```python
-
 y1_train = np.ravel(y1_train)
 y2_train = np.ravel(y2_train)
 
@@ -149,7 +148,6 @@ Out:
 1. Temperature Prediction from 1999 to 2008
 
 ```python
-
 y1_pred = reg1.predict(x1_test)
 y1_pred
 ```
@@ -159,7 +157,6 @@ Out:
 ![alt text](https://raw.githubusercontent.com/joyleeisu/ABE516X-Project/master/image/Code11.png)
 
 ```python
-
 print('Explained variance: ', explained_variance_score(y1_test, y1_pred))
 print('Mean absolute error: ', mean_absolute_error(y1_test, y1_pred))
 print('Mean squared error: ', mean_squared_error(y1_test, y1_pred))
@@ -181,7 +178,6 @@ Out:
 ![alt text](https://raw.githubusercontent.com/joyleeisu/ABE516X-Project/master/image/Code13.png)
 
 ```python
-
 type(diff1)
 sns.distplot(diff1, bins = 50)
 ```
@@ -211,7 +207,6 @@ Out:
 3. Temperature Prediction from 2009 to 2018
 
 ```python
-
 y1r_pred = reg1r.predict(x1r_test)
 
 print('Explained variance: ', explained_variance_score(y1r_test, y1r_pred))
@@ -231,7 +226,6 @@ Out:
 4. Precipitation Prediction from 2009 to 2018
 
 ```python
-
 y2r_pred = reg2r.predict(x2r_test)
 
 print('Explained variance: ', explained_variance_score(y2r_test, y2r_pred))
@@ -259,7 +253,6 @@ Out:
 ![alt text](https://raw.githubusercontent.com/joyleeisu/ABE516X-Project/master/image/Code15.png)
 
 ```python
-
 fet_ind = np.argsort(reg1.feature_importances_)
 fet_imp = reg1.feature_importances_[np.argsort(reg1.feature_importances_)][::-1]
 fig, ax = plt.subplots(1, 1, figsize = (6, 5))
